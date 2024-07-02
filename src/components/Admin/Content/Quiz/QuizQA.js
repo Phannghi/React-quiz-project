@@ -12,7 +12,8 @@ import {
     getAllQuizAdmin,
     postCreateNewQuestionForQuiz,
     postCreateNewAnswerForQuestion,
-    getQuizWithQA
+    getQuizWithQA,
+    postUpsertQA
 } from "../../../../services/apiService";
 
 const QuizQA = (props) => {
@@ -42,6 +43,7 @@ const QuizQA = (props) => {
 
     useEffect(() => {
         fetchAllQuiz();
+        console.log('questions: ', questions);
     }, []);
 
     useEffect(() => {
@@ -67,6 +69,13 @@ const QuizQA = (props) => {
             .then(buf => new File([buf], filename, { type: mimeType }));
     }
 
+    const toBase64 = file => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+    });
+
     const fetchQuizWithQA = async () => {
         let res = await getQuizWithQA(selectedQuiz.value);
         if (res && res.EC === 0) {
@@ -80,8 +89,8 @@ const QuizQA = (props) => {
                 newQA.push(item);
             }
             setQuestions(newQA);
-            console.log('check qa: ', newQA);
-            console.log('check res: ', res);
+            //console.log('check qa: ', newQA);
+            //console.log('check res: ', res);
         }
     }
 
@@ -261,18 +270,25 @@ const QuizQA = (props) => {
             }
         }
         //submit question 
-        // validate bootstrap
-        for (const question of questions) {
-            const q = await postCreateNewQuestionForQuiz(+selectedQuiz.value, question.description, question.imageFile);
-            if (q.EC !== 0) toast.error(q.EM);
-
-            for (const answer of question.answers) {
-                const a = await postCreateNewAnswerForQuestion(answer.description, answer.isCorrect, q.DT.id);
-                if (a && a.EC !== 0) toast.error(a.EM);
+        let questionClone = _.cloneDeep(questions);
+        //console.log(questionClone);
+        for (const question of questionClone) {
+            if (question.imageFile) {
+                question.imageFile = await toBase64(question.imageFile);
             }
         }
-        toast.success('Created question successfully');
-        setQuestions(initQuestions);
+        let res = await postUpsertQA({
+            quizId: selectedQuiz.value,
+            questions: questionClone,
+        })
+        //console.log("res: ", res);
+        console.log('questionClone: ', questionClone);
+        if (res && res.EC === 0) {
+            toast.success(res.EM);
+            fetchQuizWithQA();
+        } else {
+            toast.error(res.EM);
+        }
     }
 
     return (

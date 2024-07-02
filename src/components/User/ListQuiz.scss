@@ -4,6 +4,7 @@
     .card {
         .card-img-top {
             max-height: 270px;
+            object-fit: cover;
         }
     }
 }
