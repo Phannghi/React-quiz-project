@@ -5,6 +5,7 @@ import _ from 'lodash';
 import './DetailQuiz.scss';
 import Question from "./Question";
 import ModalResult from "./ModalResult";
+import RightContent from "./Content/RightContent";
 
 const DetailQuiz = (props) => {
     const params = useParams();
@@ -129,45 +130,41 @@ const DetailQuiz = (props) => {
     }
     return (
         <div className="detail-quiz-container container">
-            <div className="row g-3">
-                <div className="left-content col-md-8">
-                    <div className="card h-100">
-                        <div className="card-body p-4">
-                            <h2 className="title">
-                                Quiz {quizId}: {location?.state?.quizTitle}
-                            </h2>
-                            <div className="q-body">
-                                <img src="" alt="" />
-                            </div>
-                            <div className="q-content">
-                                <Question
-                                    handleCheckboxD={handleCheckboxD}
-                                    index={index}
-                                    data={dataQuiz && dataQuiz.length > 0 ? dataQuiz[index] : []} />
-                            </div>
-                            <div className="footer">
-                                {index > 0 ? <button
-                                    className="btn btn-light border-dark px-3"
-                                    onClick={() => handleBack()}>Back</button> : ''
-                                }
-                                {index >= 0 && index + 1 < dataQuiz.length ?
-                                    <button
-                                        className="btn btn-light border-dark px-3"
-                                        onClick={() => handleNext()}>Next</button> : ''
-                                }
+            <div className="row gy-2">
+                <div className="col-md-8">
+                    <div className="left-content h-100">
+                        <h2 className="title">
+                            Quiz {quizId}: {location?.state?.quizTitle}
+                        </h2>
+                        <div className="q-body">
+                            <img src="" alt="" />
+                        </div>
+                        <div className="q-content">
+                            <Question
+                                handleCheckboxD={handleCheckboxD}
+                                index={index}
+                                data={dataQuiz && dataQuiz.length > 0 ? dataQuiz[index] : []} />
+                        </div>
+                        <div className="footer">
+                            {index > 0 ? <button
+                                className="btn btn-light border-dark px-3"
+                                onClick={() => handleBack()}>Back</button> : ''
+                            }
+                            {index >= 0 && index + 1 < dataQuiz.length ?
                                 <button
-                                    className="btn btn-danger px-3"
-                                    onClick={() => handleFinish()}>Finish</button>
-                            </div>
+                                    className="btn btn-light border-dark px-3"
+                                    onClick={() => handleNext()}>Next</button> : ''
+                            }
+                            <button
+                                className="btn btn-danger px-3"
+                                onClick={() => handleFinish()}>Finish</button>
                         </div>
                     </div>
-
                 </div>
-                <div className="right-content col-md-4">
-                    <div className="card h-100">
-                        <div className="card-body p-4">
-                            count down
-                        </div>
+                <div className="col-md-4">
+                    <div className="right-content h-100">
+                        <RightContent
+                            dataQuiz={dataQuiz} />
                     </div>
                 </div>
                 <ModalResult
