@@ -70,3 +70,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### keyword `children`
+
+Trong React, `children` là một thuộc tính đặc biệt dùng để truyền các phần tử con vào một component. Thuộc tính này cho phép bạn nhúng các phần tử khác vào bên trong một component và có thể được truy cập thông qua props.children.

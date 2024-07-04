@@ -63,7 +63,7 @@ const Login = (props) => {
                 </div>
             </div>
             <div className="title col-3 mx-auto text-center">
-                Admin Site
+                Phan Nghi Practice
             </div>
             <div className="welcome col-3 mx-auto text-center">
                 Hello, Who is this?
