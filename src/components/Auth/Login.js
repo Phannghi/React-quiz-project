@@ -50,6 +50,13 @@ const Login = (props) => {
             setIsLoading(false);
         }
     }
+
+    const handleOnKeyDown = (event) => {
+        if (event && event.key === 'Enter') {
+            handleLogin();
+        }
+    }
+
     return (
         <div className='log-container'>
             <div className="header">
@@ -85,7 +92,8 @@ const Login = (props) => {
                         className='form-control'
                         password={password}
                         autoComplete='current-password'
-                        onChange={(event) => setPassword(event.target.value)} />
+                        onChange={(event) => setPassword(event.target.value)}
+                        onKeyDown={(event) => handleOnKeyDown(event)} />
                 </div>
                 <span className='form-text-forgot'>Forgot password ?</span>
                 <div className="mt-2">
