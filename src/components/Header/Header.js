@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '../../services/apiService';
 import { toast } from 'react-toastify';
 import { doLogOut } from '../../redux/action/userAction';
+import Language from './Language';
+
 const Header = () => {
     const account = useSelector(state => state.user.account)
     //console.log('check account', account);
@@ -42,11 +44,9 @@ const Header = () => {
                         <NavLink to="/" className='nav-link'>Home</NavLink>
                         <NavLink to="/users" className='nav-link'>User</NavLink>
                         <NavLink to="/admin" className='nav-link'>Admin</NavLink>
-                        {/* <Nav.Link href="/">Home</Nav.Link>
-                        <Nav.Link href="/users">User</Nav.Link>
-                        <Nav.Link href="/admin">Admin</Nav.Link> */}
                     </Nav>
                     <Nav>
+                        <Language />
                         {isAuthenticated === false ?
                             <>
                                 <Button

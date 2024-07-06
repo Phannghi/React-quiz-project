@@ -15,6 +15,8 @@ import DetailQuiz from './components/User/DetailQuiz';
 import ManageQuiz from './components/Admin/Content/Quiz/ManageQuiz';
 import Questions from './components/Admin/Content/Question/Questions';
 import PrivateRoute from './routes/PrivateRoute';
+import { Suspense } from 'react';
+import './Animation.scss'
 const NotFound = () => {
     return (
         <div className='alert alert-danger'>
@@ -24,7 +26,11 @@ const NotFound = () => {
 }
 const Layout = (props) => {
     return (
-        <>
+        <Suspense fallback={
+            <div className='full-screen'>
+                <span className='loader'></span>
+            </div>
+        }>
             <Routes>
                 <Route path="/" element={<App />}>
                     <Route index element={<Home />} />
@@ -62,7 +68,7 @@ const Layout = (props) => {
                 pauseOnHover
                 theme="dark"
             />
-        </>
+        </Suspense>
     )
 }
 export default Layout

@@ -6,6 +6,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.nav-language {
+  .dropdown-toggle::after {
+    display: none;
+  }
+}
 .app-container {
   position: relative;
   .header-container {

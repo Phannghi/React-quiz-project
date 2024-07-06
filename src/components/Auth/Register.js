@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import './Login.scss'
 import { registerUser } from '../../services/apiService';
+import Language from '../Header/Language';
 const Register = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -55,6 +56,7 @@ const Register = (props) => {
                         Login
                     </button>
                 </div>
+                <Language />
             </div>
             <div className="title col-3 mx-auto text-center">
                 Register new account
