@@ -40,6 +40,7 @@ const DetailQuiz = (props) => {
                         item.answers.isSelected = false;
                         answers.push(item.answers);
                     })
+                    answers = _.orderBy(answers, ['id'], ['asc']);
                     return { questionId: key, answers, description, image }
                 })
                 .value()
@@ -72,7 +73,7 @@ const DetailQuiz = (props) => {
         //         }
         //     ]
         // }
-        console.log('check data before submit: ', dataQuiz);
+        //console.log('check data before submit: ', dataQuiz);
         let payload = {
             quizId: +quizId,
             answers: []
@@ -93,10 +94,10 @@ const DetailQuiz = (props) => {
                 })
             })
             payload.answers = answers;
-            console.log('payload: ', payload)
+            //console.log('payload: ', payload)
             // submit api
             let res = await postSubmitQuiz(payload);
-            console.log('check res: ', res);
+            //console.log('check res: ', res);
             if (res && res.EC === 0) {
                 setIsShowModalResult(true);
                 setDataModalResult({

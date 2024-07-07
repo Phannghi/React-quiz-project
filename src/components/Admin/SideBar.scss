@@ -26,3 +26,26 @@
         }
     }
 }
+.admin-sidebar {
+    .pro-sidebar {
+        color: rgb(238, 238, 238);
+        & > .pro-sidebar-inner {
+            background: #233044;
+        }
+        .pro-menu > ul > .pro-sub-menu > .pro-inner-list-item {
+            background-color: #233044;
+        }
+        .pro-menu .pro-menu-item {
+            &:hover {
+                background-color: rgba(0, 0, 0, 0.08);
+                color: rgb(238, 238, 238);
+            }
+            &.pro-sub-menu .pro-inner-list-item {
+                padding-left: 0;
+                .pro-inner-item {
+                    padding: 8px 30px 8px 60px;
+                }
+            }
+        }
+    }
+}

@@ -1,4 +1,4 @@
-$header: 40px;
+$header: 60px;
 .admin-container {
     display: flex;
     .admin-sidebar {
@@ -9,8 +9,22 @@ $header: 40px;
     .admin-content {
         width: 100%;
         .admin-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             height: $header;
-            border: 1px solid green;
+            padding: 0 15px;
+            box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+            .left-side {
+                cursor: pointer;
+                font-size: 20px;
+            }
+            .right-side {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                margin-right: 15px;
+            }
         }
         .admin-main {
             height: calc(100vh - $header);

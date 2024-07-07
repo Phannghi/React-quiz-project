@@ -17,6 +17,7 @@ import Questions from './components/Admin/Content/Question/Questions';
 import PrivateRoute from './routes/PrivateRoute';
 import { Suspense } from 'react';
 import './Animation.scss'
+
 const NotFound = () => {
     return (
         <div className='alert alert-danger'>

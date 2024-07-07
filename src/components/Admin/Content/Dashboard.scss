@@ -1,0 +1,41 @@
+.dashboard-container {
+    padding: 20px;
+    .title {
+        font-size: 24px;
+        font-weight: 500;
+    }
+    .content {
+        display: flex;
+        flex-wrap: wrap;
+        .left {
+            display: flex;
+            flex-wrap: wrap;
+            .child {
+                height: 150px;
+                padding: 24px;
+                margin-right: 24px;
+                margin-bottom: 24px;
+                overflow: hidden;
+                color: rgba(0, 0, 0, 0.87);
+                border-radius: 6px;
+                box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+                &.active {
+                    color: rgb(55, 111, 208);
+                    background-color: #dfe8f6;
+                }
+                .title1 {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    font-size: 20px;
+                    font-weight: 400;
+                    margin-bottom: 20px;
+                }
+                .title2 {
+                    font-size: 25px;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+}
