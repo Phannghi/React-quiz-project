@@ -1,6 +1,7 @@
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { postChangePassword } from "../../services/apiService";
+import { useTranslation } from "react-i18next";
 
 const Password = (props) => {
     const [currentpassword, setCurrentPassword] = useState('');
@@ -9,6 +10,7 @@ const Password = (props) => {
     const [isValidCurrent, setIsValidCurrent] = useState(true);
     const [isValidNew, setIsValidNew] = useState(true);
     const [isValidConfirm, setIsValidConfirm] = useState(true);
+    const { t } = useTranslation();
 
     const handleCurrentPassword = (value) => {
         setCurrentPassword(value);
@@ -63,26 +65,26 @@ const Password = (props) => {
             <form className="form-password-container">
                 <div className="col-4">
                     <div className="mb-3">
-                        <label className="form-label">Current password:</label>
+                        <label className="form-label">{t('profile.password.currentPassword')}:</label>
                         <input type="password" className={!isValidCurrent ? 'form-control is-invalid' : 'form-control'} value={currentpassword}
                             onChange={(event) => handleCurrentPassword(event.target.value)} required />
-                        {!isValidCurrent ? <div className='invalid-feedback'>Invalid password.</div> : ''}
+                        {!isValidCurrent ? <div className='invalid-feedback'>{t('profile.password.invalidCurrentPassword')}.</div> : ''}
                     </div>
                 </div>
                 <div className="col-4">
                     <div className="mb-3">
-                        <label className="form-label">New password:</label>
+                        <label className="form-label">{t('profile.password.newPassword')}:</label>
                         <input type="password" className={!isValidNew ? 'form-control is-invalid' : 'form-control'} value={newPassword}
                             onChange={(event) => handleNewPassword(event.target.value)} required />
-                        {!isValidNew ? <div className='invalid-feedback'>New password is required.</div> : ''}
+                        {!isValidNew ? <div className='invalid-feedback'>{t('profile.password.requiredNewPassword')}.</div> : ''}
                     </div>
                 </div>
                 <div className="col-4">
                     <div className="mb-3">
-                        <label className="form-label">Confirm new password:</label>
+                        <label className="form-label">{t('profile.password.confirmNewPassword')}:</label>
                         <input type="password" className={!isValidConfirm ? 'form-control is-invalid' : 'form-control'}
                             onChange={(event) => handleConfirmNewPassword(event.target.value)} value={confirmPassword} required />
-                        {!isValidConfirm ? <div className='invalid-feedback'>New password does not match.</div> : ''}
+                        {!isValidConfirm ? <div className='invalid-feedback'>{t('profile.password.passwordMismatch')}</div> : ''}
                     </div>
                 </div>
 
@@ -91,7 +93,7 @@ const Password = (props) => {
                         className="w-100 btn btn-primary"
                         onClick={(event) => handleSubmitChangePassword(event)}
                         type="submit">
-                        Save
+                        {t('profile.save')}
                     </button>
                 </div>
             </form>

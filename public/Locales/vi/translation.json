@@ -70,5 +70,39 @@
         "totalCorrect": "Số câu đúng:",
         "showAnswerButton": "Hiển thị đáp án",
         "closeButton": "Đóng"
+    },
+    "profile": {
+        "title": "Quản lý thông tin cá nhân",
+        "close": "Đóng",
+        "save": "Lưu",
+        "information": {
+            "title": "Thông tin cá nhân",
+            "username": "Tên người dùng",
+            "email": "Email",
+            "role": "Vai trò",
+            "upload": "Tải lên",
+            "delete": "Xóa",
+            "previewImage": "Ảnh đại diện"
+        },
+        "password": {
+            "title": "Mật khẩu",
+            "currentPassword": "Mật khẩu hiện tại",
+            "newPassword": "Mật khẩu mới",
+            "confirmNewPassword": "Xác nhận mật khẩu mới",
+            "invalidCurrentPassword": "Mật khẩu không hợp lệ.",
+            "requiredNewPassword": "Yêu cầu nhập mật khẩu mới.",
+            "passwordMismatch": "Mật khẩu mới không khớp."
+        },
+        "history": {
+            "title": "Lịch sử làm bài",
+            "lastTimes": "{{quizTimes}} lần gần nhất",
+            "table": {
+                "id": "ID",
+                "quizName": "Tên bài",
+                "totalQuestions": "Tổng số câu hỏi",
+                "totalCorrect": "Tổng số câu đúng",
+                "date": "Ngày làm bài"
+            }
+        }
     }
 }

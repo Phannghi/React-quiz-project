@@ -7,10 +7,13 @@ import './Profile.scss';
 import Information from './Information';
 import Password from './Password';
 import History from './History';
+import { useTranslation } from "react-i18next";
 
 const Profile = (props) => {
     const { show, setShow } = props;
     const [key, setKey] = useState('information');
+    const { t } = useTranslation();
+
     const handleClose = () => {
         setShow(false);
     }
@@ -22,7 +25,7 @@ const Profile = (props) => {
             onHide={handleClose}
             size='xl'>
             <Modal.Header closeButton>
-                <Modal.Title>Personal Information</Modal.Title>
+                <Modal.Title>{t('profile.title')}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Tabs
@@ -31,20 +34,20 @@ const Profile = (props) => {
                     onSelect={(k) => setKey(k)}
                     className="mb-3"
                 >
-                    <Tab eventKey="information" title="Information">
+                    <Tab eventKey="information" title={t('profile.information.title')}>
                         <Information />
                     </Tab>
-                    <Tab eventKey="password" title="Password">
+                    <Tab eventKey="password" title={t('profile.password.title')}>
                         <Password />
                     </Tab>
-                    <Tab eventKey="history" title="History">
+                    <Tab eventKey="history" title={t('profile.history.title')}>
                         <History />
                     </Tab>
                 </Tabs>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
-                    Close
+                    {t('profile.close')}
                 </Button>
             </Modal.Footer>
         </Modal>

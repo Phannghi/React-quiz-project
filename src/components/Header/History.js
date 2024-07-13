@@ -1,9 +1,11 @@
 import moment from 'moment';
 import { getHistoryQuizUser } from '../../services/apiService';
 import { useEffect, useState } from 'react';
-
+import { useTranslation } from "react-i18next";
 const History = (props) => {
     const [listHistory, setListHistory] = useState([]);
+    const quizTimes = 30;
+    const { t } = useTranslation();
 
     useEffect(() => {
         fetchHistory();
@@ -15,26 +17,29 @@ const History = (props) => {
             let data = res?.DT?.data?.map(item => {
                 return {
                     id: item?.id,
-                    name: item?.quizHistory?.name ?? '',
+                    name: item?.quizHistory?.description ?? '',
                     total_questions: item?.total_questions,
                     total_correct: item?.total_correct,
                     date: moment(item.createdAt).utc().format('DD-MM-YYYY hh:mm:ss A')
                 }
             })
-            setListHistory(data);
+            data.sort((a, b) => b.id - a.id);
+            let newData = data.slice(0, quizTimes);
+            setListHistory(newData);
         }
     }
     //console.log('list history: ', listHistory);
     return (<>
+        <h5 className='ps-3'>{t('profile.history.lastTimes', { quizTimes })}</h5>
         <div className="history-container table-responsive">
             <table className="table table-bordered table-hover table-primary">
                 <thead>
                     <tr>
-                        <th scope='col'>ID</th>
-                        <th scope='col'>Quiz name</th>
-                        <th scope='col'>Total questions</th>
-                        <th scope='col'>Total correct</th>
-                        <th scope='col'>Date</th>
+                        <th scope='col'>{t('profile.history.table.id')}</th>
+                        <th scope='col'>{t('profile.history.table.quizName')}</th>
+                        <th scope='col'>{t('profile.history.table.totalQuestions')}</th>
+                        <th scope='col'>{t('profile.history.table.totalCorrect')}</th>
+                        <th scope='col'>{t('profile.history.table.date')}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,8 +49,7 @@ const History = (props) => {
                                 <tr key={`table-history-${index}`}>
                                     <td>{item.id}</td>
                                     <td className='col-3'>
-                                        <p className='text-truncate mb-0'
-                                            style={{ maxWidth: '256px' }}>
+                                        <p className='text-truncate mb-0' style={{ maxWidth: '256px' }}>
                                             {item.name}
                                         </p>
                                     </td>

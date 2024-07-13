@@ -71,6 +71,40 @@
         "showAnswerButton": "Show answer",
         "closeButton": "Close"
     },
+    "profile": {
+        "title": "Manage Personal Information",
+        "close": "Close",
+        "save": "Save",
+        "information": {
+            "title": "Information",
+            "username": "Username",
+            "email": "Email",
+            "role": "Role",
+            "upload": "Upload",
+            "delete": "Delete",
+            "previewImage": "Preview Image"
+        },
+        "password": {
+            "title": "Password",
+            "currentPassword": "Current password",
+            "newPassword": "New password",
+            "confirmNewPassword": "Confirm new password",
+            "invalidCurrentPassword": "Invalid password.",
+            "requiredNewPassword": "New password is required.",
+            "passwordMismatch": "New password does not match."
+        },
+        "history": {
+            "title": "History",
+            "lastTimes": "Last {{quizTimes}} times",
+            "table": {
+                "id": "ID",
+                "quizName": "Quiz name",
+                "totalQuestions": "Total questions",
+                "totalCorrect": "Total correct",
+                "date": "Date"
+            }
+        }
+    },
     "admin": {
         "dashboard": {},
         "sidebar": {},
