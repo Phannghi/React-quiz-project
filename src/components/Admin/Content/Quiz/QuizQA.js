@@ -43,7 +43,7 @@ const QuizQA = (props) => {
 
     useEffect(() => {
         fetchAllQuiz();
-        console.log('questions: ', questions);
+        //console.log('questions: ', questions);
     }, []);
 
     useEffect(() => {

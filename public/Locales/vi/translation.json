@@ -4,5 +4,71 @@
         "title2": "Gây ấn tượng với người tham gia biểu mẫu của bạn. Thu hút sự chú ý của họ bằng hình ảnh nổi bật và làm cho việc điền biểu mẫu trở nên dễ dàng bằng cách thay thế các bức tường câu hỏi chỉ bằng một câu hỏi tại một thời điểm.",
         "btnLogin": "Bắt đầu hoàn toàn miễn phí",
         "btnDoQuiz": "Làm bài quiz ngay bây giờ"
+    },
+    "header": {
+        "home": "Trang chủ",
+        "user": "Người dùng",
+        "admin": "Quản trị",
+        "login": "Đăng nhập",
+        "signup": "Đăng kí",
+        "hello": "Xin chào",
+        "profile": "Cá nhân",
+        "setting": "Cài đặt",
+        "logout": "Đăng xuất"
+    },
+    "login": {
+        "header": {
+            "title": "Bạn chưa có tài khoản?",
+            "btnSignUp": "Đăng ký"
+        },
+        "title": "Phan Nghi Practice",
+        "title2": "Xin chào, Ai đây?",
+        "form": {
+            "email": "Email",
+            "password": "Mật khẩu",
+            "placeholderEmail": "bruce@wayne.com",
+            "placeholderPassword": "mật khẩu ít nhất 6 ký tự",
+            "forgotPassword": "Quên mật khẩu?",
+            "btnLogin": "Đăng nhập",
+            "backToHomepage": "Trở về trang chủ"
+        }
+    },
+    "register": {
+        "header": {
+            "title": "Đã có tài khoản?",
+            "btnLogin": "Đăng nhập"
+        },
+        "title": "Đăng ký tài khoản mới",
+        "welcome": "Nhận dữ liệu tốt hơn với các biểu mẫu, khảo sát, câu đố và nhiều hơn nữa",
+        "form": {
+            "email": "Email",
+            "password": "Mật khẩu",
+            "username": "Tên người dùng",
+            "placeholderEmail": "bruce@wayne.com",
+            "placeholderPassword": "Ít nhất 6 ký tự",
+            "placeholderUsername": "Tên của bạn",
+            "terms": "Tôi đồng ý với Điều khoản Dịch vụ của NghiPhan",
+            "btnRegister": "Tạo tài khoản mới của tôi"
+        }
+    },
+    "listQuiz": {
+        "title": "Danh sách các bài kiểm tra",
+        "quizTitle": "Bài kiểm tra",
+        "startButton": "Bắt đầu ngay",
+        "noQuizMessage": "Bạn chưa có bài kiểm tra nào..."
+    },
+    "detailQuiz": {
+        "title": "Bài kiểm tra",
+        "backButton": "Quay lại",
+        "nextButton": "Tiếp theo",
+        "finishButton": "Nộp bài",
+        "question": "Câu"
+    },
+    "modalResult": {
+        "title": "Kết quả của bạn",
+        "totalQuestion": "Tổng số câu hỏi:",
+        "totalCorrect": "Số câu đúng:",
+        "showAnswerButton": "Hiển thị đáp án",
+        "closeButton": "Đóng"
     }
 }

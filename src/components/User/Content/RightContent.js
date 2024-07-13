@@ -1,9 +1,27 @@
 import CountDown from "./CountDown";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 const RightContent = (props) => {
-    const { dataQuiz } = props;
+    const { dataQuiz, currentIndex, isRunning } = props;
     const refDiv = useRef([]);
+
+
+    useEffect(() => {
+        if (refDiv.current) {
+            refDiv.current.forEach((item, index) => {
+                //console.log(index, currentIndex);
+                if (item) {
+                    if (index === currentIndex) {
+                        if ((index === currentIndex)) {
+                            item.classList.add('clicked');
+                        }
+                    } else {
+                        item.classList.remove('clicked');
+                    }
+                }
+            })
+        }
+    }, [currentIndex])
 
     const timeUp = () => {
         props.handleFinish();
@@ -15,7 +33,7 @@ const RightContent = (props) => {
         if (question && question.answers.length > 0) {
             let select = question.answers.some(answer => answer.isSelected);
             if (select)
-                return 'question selected';
+                return 'question completed';
         }
         return 'question';
     }
@@ -34,14 +52,17 @@ const RightContent = (props) => {
     return (
         <>
             <div className="main-timer">
-                <CountDown onTimeUp={timeUp} />
+                <CountDown
+                    onTimeUp={timeUp}
+                    isRunning={isRunning}
+                />
             </div>
             <div className="main-question">
                 {dataQuiz && dataQuiz.length > 0 &&
                     dataQuiz.map((item, index) => {
                         return (
                             <span key={`question-${index}`}
-                                className={getClassQuestion(item)}
+                                className={`${getClassQuestion(item)} ${index === 0 ? 'clicked' : ''}`}
                                 onClick={() => handleClickQuestion(item, index)}
                                 ref={element => refDiv.current[index] = element}
                             >{index + 1}</span>

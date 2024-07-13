@@ -1,6 +1,6 @@
 import 'react-pro-sidebar/dist/css/styles.css';
 import { ProSidebar, Menu, MenuItem, SubMenu, SidebarHeader, SidebarFooter, SidebarContent } from 'react-pro-sidebar';
-import { FaTachometerAlt, FaGem, FaList, FaGithub, FaRegLaughWink, FaHeart, FaCouch } from 'react-icons/fa';
+import { FaTachometerAlt, FaGem, FaGithub } from 'react-icons/fa';
 import { DiReact } from "react-icons/di";
 import './SideBar.scss'
 import { Link, useNavigate } from 'react-router-dom';
@@ -29,7 +29,9 @@ const SideBar = (props) => {
                         }}
                     >
                         <DiReact className='me-1' size='3em' color='aqua' />
-                        <span className='text-white' role='button' onClick={() => navigate('/')}> QUIZZ </span>
+                        <span className='text-white' role='button' onClick={() => navigate('/')}>
+                            Nghi Phan
+                        </span>
                     </div>
                 </SidebarHeader>
 
@@ -49,15 +51,15 @@ const SideBar = (props) => {
                             title='Features'
                         >
                             <MenuItem>
-                                Quản lý users
+                                Manage Users
                                 <Link to='/admin/manage-users' />
                             </MenuItem>
                             <MenuItem>
-                                Quản lý bài quiz
+                                Manage Quizzes
                                 <Link to='/admin/manage-quizzes' />
                             </MenuItem>
                             <MenuItem>
-                                Quản lý Câu hỏi
+                                Manage Questions
                                 <Link to='/admin/manage-questions' />
                             </MenuItem>
                         </SubMenu>
@@ -78,9 +80,9 @@ const SideBar = (props) => {
                             className="sidebar-btn"
                             rel="noopener noreferrer"
                         >
-                            <FaCouch />
+                            <FaGithub />
                             <span style={{ whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
-                                Gucci
+                                Github
                             </span>
                         </a>
                     </div>

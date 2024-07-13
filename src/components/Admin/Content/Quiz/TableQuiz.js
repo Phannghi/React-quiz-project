@@ -5,6 +5,7 @@ import ModalDeleteQuiz from "./ModalDeleteQuiz";
 
 const TableQuiz = (props) => {
     const { fetchAllQuiz, listQuiz } = props;
+    //console.log('listQuiz', listQuiz);
     const [showUpdateQuiz, setShowUpdateQuiz] = useState(false);
     const [showDeleteQuiz, setShowDeleteQuiz] = useState(false);
 

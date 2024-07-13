@@ -37,7 +37,7 @@ body {
                     font-weight: 400;
                     line-height: 1.5;
                     padding-left: 3rem;
-                    display: inline-block;
+                    display: inline-flex;
                     word-break: break-word;
                     white-space: normal;
                     cursor: pointer;
@@ -124,8 +124,11 @@ body {
                 &:hover {
                     background-color: #ff00006c;
                 }
-                &.selected {
+                &.completed {
                     background-color: #c6c6c6;
+                }
+                &.selected {
+                    background-color: #ebeaea;
                 }
                 &.clicked {
                     color: red;

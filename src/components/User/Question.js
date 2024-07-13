@@ -1,10 +1,15 @@
 import _ from 'lodash';
 import Lightbox from "react-awesome-lightbox";
 import { useState } from 'react';
+import { useTranslation } from "react-i18next";
+import { IoIosClose } from "react-icons/io";
+import { FaCheck } from "react-icons/fa";
 
 const Question = (props) => {
-    const { data, index } = props;
+    const { data, index, isShowAnswer, isDisabled } = props;
     const [isPreviewImage, setIsPreviewImage] = useState(false);
+
+    const { t } = useTranslation();
 
     if (_.isEmpty(data)) {
         return (<></>)
@@ -29,7 +34,7 @@ const Question = (props) => {
             }
 
             <div className="question">
-                Question {index + 1}: {data.description} ?
+                {`${t('detailQuiz.question')} ${index + 1}`} : {data.description} ?
             </div>
             <div className="answer">
                 {data.answers && data.answers.length > 0 &&
@@ -38,12 +43,21 @@ const Question = (props) => {
                             <div key={`ans-${idx}`} className="answer-child">
                                 <div className="form-check">
                                     <input
+                                        disabled={isDisabled}
                                         type="checkbox"
                                         id={`ans-${idx}`}
                                         checked={item.isSelected}
                                         onChange={() => handleCheckbox(item.id, data.questionId)} />
                                     <label className="a-label" htmlFor={`ans-${idx}`}>
                                         {item.description}
+                                        {isShowAnswer && <>
+                                            {item.isSelected && item.isCorrect === false &&
+                                                <IoIosClose className='ms-2' color='#FF0000' size='1.6em' />
+                                            }
+                                            {item.isCorrect === true &&
+                                                <FaCheck className='ms-2' color='#29bf12' size='1.1em' />
+                                            }
+                                        </>}
                                     </label>
                                 </div>
                             </div>

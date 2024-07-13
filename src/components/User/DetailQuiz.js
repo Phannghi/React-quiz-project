@@ -6,15 +6,21 @@ import './DetailQuiz.scss';
 import Question from "./Question";
 import ModalResult from "./ModalResult";
 import RightContent from "./Content/RightContent";
-
+import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 const DetailQuiz = (props) => {
     const params = useParams();
     const location = useLocation();
+    const { t } = useTranslation();
     const quizId = params.id;
     const [dataQuiz, setDataQuiz] = useState([]);
     const [index, setIndex] = useState(0);
     const [isShowModalResult, setIsShowModalResult] = useState(false);
     const [dataModalResult, setDataModalResult] = useState({});
+    const [loading, setLoading] = useState(true);
+    const [isShowAnswer, setIsShowAnswer] = useState(false);
+    const [isDisabled, setIsDisabled] = useState(false);
+    const [isRunning, setIsRunning] = useState(true); // đồng hồ dừng khi finhish
 
     useEffect(() => {
         fetchQuestion();
@@ -38,6 +44,7 @@ const DetailQuiz = (props) => {
                             image = item.image;
                         }
                         item.answers.isSelected = false;
+                        item.answers.isCorrect = false;
                         answers.push(item.answers);
                     })
                     answers = _.orderBy(answers, ['id'], ['asc']);
@@ -45,6 +52,7 @@ const DetailQuiz = (props) => {
                 })
                 .value()
             setDataQuiz(data);
+            setLoading(false); // sau khi load xong thì set state thành fasle
             //console.log(data);
         }
     }
@@ -53,6 +61,7 @@ const DetailQuiz = (props) => {
     const handleBack = () => {
         if (index - 1 < 0) return;
         setIndex(index - 1);
+
     }
     const handleNext = () => {
         if (dataQuiz && index + 1 < dataQuiz.length)
@@ -74,6 +83,8 @@ const DetailQuiz = (props) => {
         //     ]
         // }
         //console.log('check data before submit: ', dataQuiz);
+        setIsDisabled(true);
+        setIsRunning(false);
         let payload = {
             quizId: +quizId,
             answers: []
@@ -99,14 +110,35 @@ const DetailQuiz = (props) => {
             let res = await postSubmitQuiz(payload);
             //console.log('check res: ', res);
             if (res && res.EC === 0) {
-                setIsShowModalResult(true);
                 setDataModalResult({
                     countCorrect: res.DT.countCorrect,
                     countTotal: res.DT.countTotal,
                     quizdata: res.DT.quizdata
                 });
+                setIsShowModalResult(true);
+                //update dataQUiz with correct answers
+                let dataQuizClone = _.cloneDeep(dataQuiz)
+                //console.log(dataQuizClone);
+                let quizData = res.DT.quizData;
+                for (let q of quizData) {
+                    for (const qClone of dataQuizClone) {
+                        if (+q.questionId === +qClone.questionId) {
+                            let newAnswer = [];
+                            for (const aClone of qClone.answers) {
+                                let correctAnswer = q.systemAnswers.find(item => +item.id === aClone.id);
+                                if (correctAnswer) {
+                                    aClone.isCorrect = true;
+                                    //console.log(aClone);
+                                }
+                                newAnswer.push(aClone);
+                            }
+                            qClone.answers = newAnswer
+                        }
+                    }
+                    setDataQuiz(dataQuizClone);
+                }
             } else {
-
+                toast.error(res.EM);
             }
         }
     }
@@ -127,7 +159,6 @@ const DetailQuiz = (props) => {
             dataQuizClone[index] = question;
             setDataQuiz(dataQuizClone);
         }
-
     }
     return (
         <div className="detail-quiz-container container">
@@ -135,7 +166,7 @@ const DetailQuiz = (props) => {
                 <div className="col-md-8">
                     <div className="left-content h-100">
                         <h2 className="title">
-                            Quiz {quizId}: {location?.state?.quizTitle}
+                            {`${t('detailQuiz.title')} ${quizId}: ${location?.state?.quizTitle}`}
                         </h2>
                         <div className="q-body">
                             <img src="" alt="" />
@@ -143,37 +174,45 @@ const DetailQuiz = (props) => {
                         <div className="q-content">
                             <Question
                                 handleCheckboxD={handleCheckboxD}
+                                isDisabled={isDisabled}
+                                isShowAnswer={isShowAnswer}
                                 index={index}
                                 data={dataQuiz && dataQuiz.length > 0 ? dataQuiz[index] : []} />
                         </div>
                         <div className="footer">
                             {index > 0 ? <button
                                 className="btn btn-light border-dark px-3"
-                                onClick={() => handleBack()}>Back</button> : ''
+                                onClick={() => handleBack()}>{t('detailQuiz.backButton')}</button> : ''
                             }
                             {index >= 0 && index + 1 < dataQuiz.length ?
                                 <button
                                     className="btn btn-light border-dark px-3"
-                                    onClick={() => handleNext()}>Next</button> : ''
+                                    onClick={() => handleNext()}>{t('detailQuiz.nextButton')}</button> : ''
                             }
                             <button
+                                disabled={isDisabled}
                                 className="btn btn-danger px-3"
-                                onClick={() => handleFinish()}>Finish</button>
+                                onClick={() => handleFinish()}>{t('detailQuiz.finishButton')}</button>
                         </div>
                     </div>
                 </div>
                 <div className="col-md-4">
                     <div className="right-content h-100">
-                        <RightContent
+                        {loading ? 'Loading...' : <RightContent
                             dataQuiz={dataQuiz}
                             handleFinish={handleFinish}
-                            setIndex={setIndex} />
+                            setIndex={setIndex}
+                            currentIndex={index}
+                            isRunning={isRunning} />
+                        }
                     </div>
                 </div>
                 <ModalResult
                     show={isShowModalResult}
                     setShow={setIsShowModalResult}
                     dataModalResult={dataModalResult}
+                    setIsShowAnswer={setIsShowAnswer}
+                    setIsShowModalResult={setIsShowModalResult}
                 />
             </div>
         </div>

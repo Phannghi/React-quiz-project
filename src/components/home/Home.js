@@ -6,7 +6,7 @@ const Home = (props) => {
     const isAuthenticated = useSelector(state => state.user.isAuthenticated)
     //console.log('account: ', account, 'isAuthenticated: ', isAuthenticated)
     const navigate = useNavigate();
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     return (
         <div className="home-container">

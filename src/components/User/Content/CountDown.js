@@ -1,7 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const CountDown = (props) => {
-    const [count, setCount] = useState(1800);
+    const timeQuiz = 1800;
+    const [count, setCount] = useState(timeQuiz);
+    const { isRunning } = props;
+    let timeCompleted = useRef(0);
 
     const toHHMMSS = (sec) => {
         const hours = Math.floor(sec / 3600);
@@ -17,7 +20,12 @@ const CountDown = (props) => {
 
     useEffect(() => {
         if (count === 0) {
+            timeCompleted.current = timeQuiz;
             props.onTimeUp();
+            return;
+        }
+        if (!isRunning) {
+            timeCompleted.current = timeQuiz - count
             return;
         }
         const timer = setInterval(() => {
@@ -26,7 +34,8 @@ const CountDown = (props) => {
         return () => {
             clearInterval(timer);
         }
-    }, [count])
+    }, [count, isRunning])
+
     return (
         <div className="countdown-container">
             {toHHMMSS(count)}

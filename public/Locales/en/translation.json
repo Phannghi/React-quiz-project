@@ -4,5 +4,78 @@
         "title2": "Impress your form takers. Catch their eye with striking visuals, and make form-filling feel effortless by replacing walls of questions with just one at a time.",
         "btnLogin": "Get's started. It's free",
         "btnDoQuiz": "Doing Quiz Now"
+    },
+    "header": {
+        "home": "Home",
+        "user": "User",
+        "admin": "Admin",
+        "login": "Log in",
+        "signup": "Sign up",
+        "hello": "Hello",
+        "profile": "Profile",
+        "setting": "Setting",
+        "logout": "Log out"
+    },
+    "login": {
+        "header": {
+            "title": "Don't have an account yet?",
+            "btnSignUp": "Sign up"
+        },
+        "title": "Phan Nghi Practice",
+        "title2": "Hello, Who is this?",
+        "form": {
+            "email": "Email",
+            "password": "Password",
+            "placeholderEmail": "bruce@wayne.com",
+            "placeholderPassword": "At least 6 characters",
+            "forgotPassword": "Forgot password ?",
+            "btnLogin": "Login",
+            "backToHomepage": "Go to homepage"
+        }
+    },
+    "register": {
+        "header": {
+            "title": "Already have an account?",
+            "btnLogin": "Login"
+        },
+        "title": "Register new account",
+        "welcome": "Get better data with conversational forms, surveys, quizzes, and more",
+        "form": {
+            "email": "Email",
+            "password": "Password",
+            "username": "Username",
+            "placeholderEmail": "bruce@wayne.com",
+            "placeholderPassword": "At least 6 characters",
+            "placeholderUsername": "Your name",
+            "terms": "I agree to NghiPhan's Terms of Service",
+            "btnRegister": "Create my new account"
+        }
+    },
+    "listQuiz": {
+        "title": "List of Quizzes",
+        "quizTitle": "Quiz",
+        "startButton": "Start now",
+        "noQuizMessage": "You don't have any quiz now..."
+    },
+    "detailQuiz": {
+        "title": "Quiz",
+        "backButton": "Back",
+        "nextButton": "Next",
+        "finishButton": "Finish",
+        "question": "Question"
+    },
+    "modalResult": {
+        "title": "Your result",
+        "totalQuestion": "Total question:",
+        "totalCorrect": "Total correct:",
+        "showAnswerButton": "Show answer",
+        "closeButton": "Close"
+    },
+    "admin": {
+        "dashboard": {},
+        "sidebar": {},
+        "manage-user": {},
+        "manage-quiz": {},
+        "manage-questions": {}
     }
 }

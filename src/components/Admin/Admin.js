@@ -4,13 +4,19 @@ import { FaBars } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Language from "../Header/Language";
 import { NavDropdown } from "react-bootstrap";
+import { useNavigate } from 'react-router-dom';
+import { logOut } from '../../services/apiService';
+import { toast } from 'react-toastify';
+import { doLogOut } from '../../redux/action/userAction';
 
 const Admin = (props) => {
     const [collapsed, setCollapsed] = useState(false);
     const account = useSelector(state => state.user.account)
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         document.body.classList.add('ovf-hidden');
@@ -19,8 +25,16 @@ const Admin = (props) => {
         };
     }, [])
 
-    const handleLogOut = () => {
-
+    const handleLogOut = async () => {
+        let res = await logOut(account.email, account.refresh_token);
+        //console.log('log out:', res);
+        if (res && res.EC === 0) {
+            dispatch(doLogOut());
+            navigate('/login');
+            toast.success(res.EM);
+        } else {
+            toast.error(res.EM);
+        }
     }
     return (
         <div className="admin-container">
@@ -35,9 +49,6 @@ const Admin = (props) => {
                     <div className="right-side">
                         <Language />
                         <NavDropdown title={`Hello, ${account.username}`} id="basic-nav-dropdown">
-                            <NavDropdown.Item > Profile </NavDropdown.Item>
-                            <NavDropdown.Item >Setting</NavDropdown.Item>
-                            <NavDropdown.Divider />
                             <NavDropdown.Item onClick={() => handleLogOut()}>Log out </NavDropdown.Item>
                         </NavDropdown>
                     </div>

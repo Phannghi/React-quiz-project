@@ -9,13 +9,20 @@ import { logOut } from '../../services/apiService';
 import { toast } from 'react-toastify';
 import { doLogOut } from '../../redux/action/userAction';
 import Language from './Language';
+import { useTranslation } from 'react-i18next';
+import { NavItem } from 'react-bootstrap';
+import { useState } from 'react';
+import Profile from './Profile';
 
 const Header = () => {
     const account = useSelector(state => state.user.account)
     //console.log('check account', account);
+    const [isShowProfile, setIsShowProfile] = useState(false);
     const isAuthenticated = useSelector(state => state.user.isAuthenticated)
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { t } = useTranslation();
+
     const handleLogin = () => {
         navigate('/login');
     }
@@ -33,17 +40,29 @@ const Header = () => {
             toast.error(res.EM);
         }
     }
-    return (
+
+    const handleNavigateAdmin = () => {
+        if (account && account.role && account.role === 'ADMIN') {
+            toast.success('Access to Admin successfully');
+            navigate('/admin');
+        } else {
+            toast.error("Your account doesn't have access to Admin ");
+            return;
+        }
+    }
+
+    return (<>
         <Navbar expand="lg" className="bg-body-tertiary">
             <Container>
                 {/* <Navbar.Brand href="#home">Gucci Dior</Navbar.Brand> */}
-                <NavLink to="/" className="navbar-brand">Gucci Dior</NavLink>
+                <NavLink to="/" className="navbar-brand">Nghi Phan</NavLink>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <NavLink to="/" className='nav-link'>Home</NavLink>
-                        <NavLink to="/users" className='nav-link'>User</NavLink>
-                        <NavLink to="/admin" className='nav-link'>Admin</NavLink>
+                        <NavLink to="/" className='nav-link'>{t('header.home')}</NavLink>
+                        <NavLink to="/users" className='nav-link'>{t('header.user')}</NavLink>
+                        <Nav.Link onClick={() => handleNavigateAdmin()}
+                            className='nav-link'>{t('header.admin')}</Nav.Link>
                     </Nav>
                     <Nav>
                         <Language />
@@ -52,22 +71,28 @@ const Header = () => {
                                 <Button
                                     variant='light'
                                     className='btn-login me-3 border-dark'
-                                    onClick={() => handleLogin()}>Log in</Button>
+                                    onClick={handleLogin}>{t('header.login')}</Button>
                                 <Button
                                     variant='dark'
                                     className='btn-sign'
-                                    onClick={() => handleRegister()}>Sign up</Button>
+                                    onClick={handleRegister}>{t('header.signup')}</Button>
                             </> :
-                            <NavDropdown title={`Hello, ${account.username}`} id="basic-nav-dropdown">
-                                <NavDropdown.Item > Profile </NavDropdown.Item>
-                                <NavDropdown.Item >Setting</NavDropdown.Item>
+                            <NavDropdown title={`${t('header.hello')}, ${account.username}`} id="basic-nav-dropdown">
+                                <NavDropdown.Item onClick={() => setIsShowProfile(true)}>{t('header.profile')}</NavDropdown.Item>
                                 <NavDropdown.Divider />
-                                <NavDropdown.Item onClick={() => handleLogOut()}>Log out </NavDropdown.Item>
+                                <NavDropdown.Item onClick={handleLogOut}>{t('header.logout')}</NavDropdown.Item>
                             </NavDropdown>}
                     </Nav>
                 </Navbar.Collapse>
             </Container>
         </Navbar>
+        <Profile
+            show={isShowProfile}
+            setShow={setIsShowProfile}
+        />
+    </>
+
+
     );
 }
 

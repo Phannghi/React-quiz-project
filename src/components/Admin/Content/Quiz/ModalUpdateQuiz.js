@@ -63,7 +63,7 @@ const ModalUpdateQuiz = (props) => {
             return;
         }
 
-        let data = await putUpdateQuiz(dataUpdate.id, description, name, type, image);
+        let data = await putUpdateQuiz(dataUpdate.id, description, name, type?.value, image);
         //console.log(data);
         if (data && data.EC === 0) {
             toast.success(data.EM);
@@ -108,14 +108,6 @@ const ModalUpdateQuiz = (props) => {
                                 onChange={setType}
                                 value={type}
                                 placeholder={"Quiz type..."} />
-                            {/* <select
-                                className="form-select"
-                                onChange={(event) => setType(event.target.value)}
-                                value={type}>
-                                <option value='EASY'>EASY</option>
-                                <option value='MEDIUM'>MEDIUM</option>
-                                <option value='HARD'>HARD</option>
-                            </select> */}
                         </div>
                         <div className="col-md-12">
                             <label className='form-label-img' htmlFor='labelUpload'>
