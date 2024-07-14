@@ -2,9 +2,8 @@ import CountDown from "./CountDown";
 import { useEffect, useRef } from "react";
 
 const RightContent = (props) => {
-    const { dataQuiz, currentIndex, isRunning } = props;
+    const { dataQuiz, currentIndex, isRunning, dataCorrect, isShowAnswer } = props;
     const refDiv = useRef([]);
-
 
     useEffect(() => {
         if (refDiv.current) {
@@ -12,9 +11,7 @@ const RightContent = (props) => {
                 //console.log(index, currentIndex);
                 if (item) {
                     if (index === currentIndex) {
-                        if ((index === currentIndex)) {
-                            item.classList.add('clicked');
-                        }
+                        item.classList.add('clicked');
                     } else {
                         item.classList.remove('clicked');
                     }
@@ -23,6 +20,17 @@ const RightContent = (props) => {
         }
     }, [currentIndex])
 
+    useEffect(() => {
+        if (isShowAnswer) {
+            if (refDiv.current.length > 0 && dataCorrect.length > 0) {
+                refDiv.current.forEach((item, index) => {
+                    if (dataCorrect[index] === false) {
+                        item.classList.add('wrong');
+                    }
+                });
+            }
+        }
+    }, [dataCorrect, isShowAnswer]);
     const timeUp = () => {
         props.handleFinish();
     }

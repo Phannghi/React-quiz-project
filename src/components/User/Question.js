@@ -6,7 +6,7 @@ import { IoIosClose } from "react-icons/io";
 import { FaCheck } from "react-icons/fa";
 
 const Question = (props) => {
-    const { data, index, isShowAnswer, isDisabled } = props;
+    const { data, index, isShowAnswer } = props;
     const [isPreviewImage, setIsPreviewImage] = useState(false);
 
     const { t } = useTranslation();
@@ -43,7 +43,7 @@ const Question = (props) => {
                             <div key={`ans-${idx}`} className="answer-child">
                                 <div className="form-check">
                                     <input
-                                        disabled={isDisabled}
+                                        disabled={isShowAnswer}
                                         type="checkbox"
                                         id={`ans-${idx}`}
                                         checked={item.isSelected}

@@ -96,6 +96,13 @@
         "history": {
             "title": "Lịch sử làm bài",
             "lastTimes": "{{quizTimes}} lần gần nhất",
+            "filter": "Lọc lịch sử",
+            "filterOptions": {
+                "today": "Hôm nay",
+                "last3Days": "3 ngày gần nhất",
+                "lastWeek": "Tuần trước",
+                "lastMonth": "Tháng trước"
+            },
             "table": {
                 "id": "ID",
                 "quizName": "Tên bài",

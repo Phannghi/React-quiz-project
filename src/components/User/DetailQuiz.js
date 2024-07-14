@@ -19,7 +19,7 @@ const DetailQuiz = (props) => {
     const [dataModalResult, setDataModalResult] = useState({});
     const [loading, setLoading] = useState(true);
     const [isShowAnswer, setIsShowAnswer] = useState(false);
-    const [isDisabled, setIsDisabled] = useState(false);
+    const [dataCorrect, setDataCorrect] = useState([]);
     const [isRunning, setIsRunning] = useState(true); // đồng hồ dừng khi finhish
 
     useEffect(() => {
@@ -83,7 +83,6 @@ const DetailQuiz = (props) => {
         //     ]
         // }
         //console.log('check data before submit: ', dataQuiz);
-        setIsDisabled(true);
         setIsRunning(false);
         let payload = {
             quizId: +quizId,
@@ -110,13 +109,15 @@ const DetailQuiz = (props) => {
             let res = await postSubmitQuiz(payload);
             //console.log('check res: ', res);
             if (res && res.EC === 0) {
+                // setIsShowAnswer(true);
                 setDataModalResult({
                     countCorrect: res.DT.countCorrect,
                     countTotal: res.DT.countTotal,
                     quizdata: res.DT.quizdata
                 });
                 setIsShowModalResult(true);
-                //update dataQUiz with correct answers
+                // 
+                //update dataQuiz with correct answers
                 let dataQuizClone = _.cloneDeep(dataQuiz)
                 //console.log(dataQuizClone);
                 let quizData = res.DT.quizData;
@@ -137,6 +138,8 @@ const DetailQuiz = (props) => {
                     }
                     setDataQuiz(dataQuizClone);
                 }
+                let isCorrectArr = quizData.map(item => item.isCorrect)
+                setDataCorrect(isCorrectArr);
             } else {
                 toast.error(res.EM);
             }
@@ -174,7 +177,6 @@ const DetailQuiz = (props) => {
                         <div className="q-content">
                             <Question
                                 handleCheckboxD={handleCheckboxD}
-                                isDisabled={isDisabled}
                                 isShowAnswer={isShowAnswer}
                                 index={index}
                                 data={dataQuiz && dataQuiz.length > 0 ? dataQuiz[index] : []} />
@@ -190,7 +192,7 @@ const DetailQuiz = (props) => {
                                     onClick={() => handleNext()}>{t('detailQuiz.nextButton')}</button> : ''
                             }
                             <button
-                                disabled={isDisabled}
+                                disabled={isShowAnswer}
                                 className="btn btn-danger px-3"
                                 onClick={() => handleFinish()}>{t('detailQuiz.finishButton')}</button>
                         </div>
@@ -203,7 +205,9 @@ const DetailQuiz = (props) => {
                             handleFinish={handleFinish}
                             setIndex={setIndex}
                             currentIndex={index}
-                            isRunning={isRunning} />
+                            isRunning={isRunning}
+                            dataCorrect={dataCorrect}
+                            isShowAnswer={isShowAnswer} />
                         }
                     </div>
                 </div>

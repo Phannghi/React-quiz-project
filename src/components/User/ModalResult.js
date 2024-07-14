@@ -4,7 +4,6 @@ import Modal from 'react-bootstrap/Modal';
 import { useTranslation } from 'react-i18next';
 const ModalResult = (props) => {
     const { show, setShow, dataModalResult } = props;
-    const [isDisabled, setIsDisabled] = useState(false);
 
     const { t } = useTranslation();
     const handleClose = () => setShow(false);
@@ -13,7 +12,6 @@ const ModalResult = (props) => {
         handleClose();
         props.setIsShowModalResult(false);
         props.setIsShowAnswer(true);
-        setIsDisabled(true);
     }
     return (
         <>
@@ -39,13 +37,9 @@ const ModalResult = (props) => {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button
-                        disabled={isDisabled}
                         variant="secondary"
                         onClick={() => handleShowAnswer()}>
                         {t('modalResult.showAnswerButton')}
-                    </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                        {t('modalResult.closeButton')}
                     </Button>
                 </Modal.Footer>
             </Modal>

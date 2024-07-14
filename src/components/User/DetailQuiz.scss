@@ -125,13 +125,16 @@ body {
                     background-color: #ff00006c;
                 }
                 &.completed {
-                    background-color: #c6c6c6;
+                    background-color: #e1e1e1;
                 }
                 &.selected {
                     background-color: #ebeaea;
                 }
                 &.clicked {
                     color: red;
+                }
+                &.wrong {
+                    border-color: #ff0000;
                 }
             }
         }

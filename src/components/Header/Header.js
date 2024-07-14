@@ -64,7 +64,7 @@ const Header = () => {
                         <Nav.Link onClick={() => handleNavigateAdmin()}
                             className='nav-link'>{t('header.admin')}</Nav.Link>
                     </Nav>
-                    <Nav>
+                    <Nav className='gap-1'>
                         <Language />
                         {isAuthenticated === false ?
                             <>

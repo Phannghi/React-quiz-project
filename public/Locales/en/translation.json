@@ -96,6 +96,13 @@
         "history": {
             "title": "History",
             "lastTimes": "Last {{quizTimes}} times",
+            "filter": "History filter",
+            "filterOptions": {
+                "today": "Today",
+                "last3Days": "Last 3 Days",
+                "lastWeek": "Last Week",
+                "lastMonth": "Last Month"
+            },
             "table": {
                 "id": "ID",
                 "quizName": "Quiz name",
